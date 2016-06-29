@@ -1,6 +1,7 @@
 import org.junit.Test;
 import rx.Observable;
 
+import java.math.BigInteger;
 import java.time.DayOfWeek;
 import java.util.concurrent.TimeUnit;
 
@@ -93,4 +94,12 @@ public class LibraryTest {
         TimeUnit.SECONDS.sleep(20);
     }
 
+    @Test
+    public void testScanOperator() {
+        Observable<BigInteger> factorials = Observable
+                .range(2, 100)
+                .scan(BigInteger.ONE, (big, curr) -> big.multiply(BigInteger.valueOf(curr)));
+        factorials
+                .subscribe(System.out::println);
+    }
 }
